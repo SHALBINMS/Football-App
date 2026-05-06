@@ -1,14 +1,20 @@
 
 import { useEffect, useState } from "react";
+import "./App.css";
+import PlayerList from "./PlayerList";
+import dummyPlayers from "./data/Players";
 
 function App() {
 
   const [players , setPlayers] = useState([]);
   const [loading,setLoading] = useState(true);
   const [error,setError] = useState(null);
+  const [searchTerm,setSearchTerm] = useState("");
+
+  
 
  
-  useEffect(() => {
+  /*useEffect(() => {
     const fetchPlayers = async () => {
       try {
         console.log("Fetching data...");
@@ -35,19 +41,32 @@ function App() {
         setPlayers(data.response.suggestions);
         setLoading(false);
 
-      } catch (error) {
+      }
+  
+     
+        catch (error) {
         console.log("Error:", error);
         setError("Failed to fetch data");
         setLoading(false);
       }
     };
 
-    fetchPlayers();
-  }, []);
+   // fetchPlayers();
+  }, []);*/
+
+  useEffect(() => {
+  setPlayers(dummyPlayers);
+  setLoading(false);
+}, []);
 
   useEffect ( () => {
     console.log("Updated players:", players);
   },[players]);
+
+
+const filteredPlayers = players.filter((player) => 
+player.name.toLowerCase().includes(searchTerm.toLowerCase())
+)
 
 if (loading) {
   return <h2>Loading players...</h2>;
@@ -58,13 +77,21 @@ if (error) {
 }
 return (
   <div>
-    <h1>Football Players of the World</h1>
+    <h1 style={{ textAlign: "center" }}>
+        ⚽ Football Players Dashboard
+      </h1>
 
-    {players.map((player) => (
-      <div key={player.id}>
-        <p>{player.name}</p>
-      </div>
-    ))}
+  <div className="search-bar">
+  <input
+    type="text"
+    placeholder="Search football players..."
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    className="search-input"
+  />
+ </div>
+
+    <PlayerList players={filteredPlayers} />
 
   </div>
 );
