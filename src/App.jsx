@@ -10,6 +10,7 @@ function App() {
   const [loading,setLoading] = useState(true);
   const [error,setError] = useState(null);
   const [searchTerm,setSearchTerm] = useState("");
+  const [sortOption, setSortOption] = useState("");
 
   
 
@@ -68,6 +69,22 @@ const filteredPlayers = players.filter((player) =>
 player.name.toLowerCase().includes(searchTerm.toLowerCase())
 )
 
+const sortedPlayers = [...filteredPlayers];
+
+if (sortOption === "high-score") {
+  sortedPlayers.sort((a, b) => b.score - a.score);
+}
+
+if (sortOption === "low-score") {
+  sortedPlayers.sort((a,b) => a.score - b.score);
+}
+
+if (sortOption === "a-z") {
+  sortedPlayers.sort((a,b) => 
+    a.name.localeCompare(b.name)
+  );
+}
+
 if (loading) {
   return <h2>Loading players...</h2>;
 }
@@ -91,7 +108,28 @@ return (
   />
  </div>
 
-    <PlayerList players={filteredPlayers} />
+ <div className="sort-container">
+  <select
+    value={sortOption}
+    onChange={(e) => setSortOption(e.target.value)}
+    className="sort-select"
+  >
+    <option value="">Sort Players</option>
+    <option value="high-score">Highest Score</option>
+    <option value="low-score">Lowest Score</option>
+    <option value="a-z">A-Z</option>
+  </select>
+</div>
+
+    {
+      sortedPlayers.length > 0 ?(
+        <PlayerList players={sortedPlayers} />
+      ) : (
+        <h2 className="not-found">
+        ⚽ No players found
+        </h2>
+      )
+    }
 
   </div>
 );
