@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./styles/App.css";
 import PlayerList from "./PlayerList";
-import dummyPlayers from "./data/Players";
+import shuffledPlayers from "./data/Players";
 
 function App() {
 
@@ -11,6 +11,7 @@ function App() {
   const [error,setError] = useState(null);
   const [searchTerm,setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
+  const [eliteOnly,setEliteOnly] = useState(false);
 
   
 
@@ -56,7 +57,7 @@ function App() {
   }, []);*/
 
   useEffect(() => {
-  setPlayers(dummyPlayers);
+  setPlayers(shuffledPlayers);
   setLoading(false);
 }, []);
 
@@ -65,9 +66,17 @@ function App() {
   },[players]);
 
 
-const filteredPlayers = players.filter((player) => 
-player.name.toLowerCase().includes(searchTerm.toLowerCase())
-)
+const filteredPlayers = players.filter((player) => {
+  const matchesSearch = player.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const matchesElite = eliteOnly ? player.rating > 90 : true;
+
+   return matchesSearch && matchesElite;
+});
+
+const handleEliteToggle = () => {
+  setEliteOnly(!eliteOnly);
+}
 
 const sortedPlayers = [...filteredPlayers];
 
@@ -107,6 +116,12 @@ return (
     className="search-input"
   />
  </div>
+
+<div className="filter-container">
+  <button className="elite-btn" onClick={handleEliteToggle}>
+    {eliteOnly ? "Show All Players" : "Show Elite Players"}
+  </button>
+</div>
 
  <div className="sort-container">
   <select
