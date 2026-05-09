@@ -1,3 +1,4 @@
+import defaultPlayer from "./assets/players/default_avatar.jpg";
 function PlayerCard({ player }) {
   return (
     <div
@@ -5,6 +6,11 @@ function PlayerCard({ player }) {
     >
       <div className="card-top">
         <span className="badge">⚽</span>
+        <img
+          src={player.image || defaultPlayer}
+          alt={player.name}
+          className="player-image"
+       />
         <h3>{player.name}</h3>
       </div>
 

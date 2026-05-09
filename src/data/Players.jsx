@@ -1,65 +1,79 @@
+import messi from "../assets/players/messi.webp";
+import mbappe from "../assets/players/mbappe.webp";
+import haaland from "../assets/players/haaland.webp";
+import salah from "../assets/players/salah.webp";
+import bellingham from "../assets/players/jude.webp";
+import ronaldo from "../assets/players/ronaldo.webp";
+import defaultPlayer from "../assets/players/default_avatar.jpg";
+
 const dummyPlayers = [
   {
-    id: "1",
-    name: "Kylian Mbappé",
-    team: "Real Madrid",
-    nationality: "France",
-    position: "Forward",
-    rating: 94,
-    goals: 38,
-    assists: 12,
-    age: 26,
-    score: 301297
-  },
-  {
-    id: "2",
-    name: "Erling Haaland",
-    team: "Manchester City",
-    nationality: "Norway",
-    position: "Striker",
-    rating: 93,
-    goals: 42,
-    assists: 7,
-    age: 25,
-    score: 301250
-  },
-  {
-    id: "3",
-    name: "Lionel Messi",
-    team: "Inter Miami",
-    nationality: "Argentina",
-    position: "Forward",
-    rating: 93,
-    goals: 28,
-    assists: 18,
-    age: 38,
-    score: 301220
-  },
-  {
-    id: "4",
-    name: "Mohamed Salah",
-    team: "Liverpool",
-    nationality: "Egypt",
-    position: "Forward",
-    rating: 91,
-    goals: 30,
-    assists: 14,
-    age: 32,
-    score: 301210
-  },
-  {
-    id: "5",
-    name: "Jude Bellingham",
-    team: "Real Madrid",
-    nationality: "England",
-    position: "Midfielder",
-    rating: 91,
-    goals: 18,
-    assists: 10,
-    age: 22,
-    score: 301205
-  },
-  {
+  id: "1",
+  name: "Kylian Mbappé",
+  team: "Real Madrid",
+  nationality: "France",
+  position: "Forward",
+  rating: 94,
+  goals: 38,
+  assists: 12,
+  age: 26,
+  score: 301297,
+  image: mbappe
+},
+{
+  id: "2",
+  name: "Erling Haaland",
+  team: "Manchester City",
+  nationality: "Norway",
+  position: "Striker",
+  rating: 93,
+  goals: 42,
+  assists: 7,
+  age: 25,
+  score: 301250,
+  image: haaland
+},
+{
+  id: "3",
+  name: "Lionel Messi",
+  team: "Inter Miami",
+  nationality: "Argentina",
+  position: "Forward",
+  rating: 93,
+  goals: 28,
+  assists: 18,
+  age: 38,
+  score: 301220,
+  image: messi
+},
+{
+  id: "4",
+  name: "Mohamed Salah",
+  team: "Liverpool",
+  nationality: "Egypt",
+  position: "Forward",
+  rating: 91,
+  goals: 30,
+  assists: 14,
+  age: 32,
+  score: 301210,
+  image: salah
+},
+{
+  id: "5",
+  name: "Jude Bellingham",
+  team: "Real Madrid",
+  nationality: "England",
+  position: "Midfielder",
+  rating: 91,
+  goals: 18,
+  assists: 10,
+  age: 22,
+  score: 301205,
+  image: bellingham
+},
+
+{
     id: "6",
     name: "Vinícius Jr",
     team: "Real Madrid",
@@ -481,7 +495,8 @@ const dummyPlayers = [
     goals: 40,
     assists: 6,
     age: 40,
-    score: 301075
+    score: 301075,
+    image: ronaldo
   },
 
   {
