@@ -1,4 +1,4 @@
-import defaultPlayer from "./assets/players/default_avatar.jpg";
+import defaultPlayer from "../assets/players/default_avatar.jpg";
 function PlayerCard({ player }) {
   return (
     <div
