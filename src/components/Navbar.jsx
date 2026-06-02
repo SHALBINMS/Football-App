@@ -131,24 +131,133 @@ function NavBar() {
         </NavLink>
 
         <NavLink to="/players" className={linkStyles}>
-          Players
-          
+          {({ isActive }) => (
+            <>
+              Players
+              {isActive && (
+                <span
+                  className="
+                  absolute
+                  left-0
+                  -bottom-1
+
+                  w-full
+                  h-[2px]
+
+                  rounded-full
+
+                  bg-cyan-400
+
+                  shadow-[0_0_12px_cyan]
+                "
+                />
+              )}
+            </>
+          )}
         </NavLink>
 
         <NavLink to="/match-center" className={linkStyles}>
-          Match Center
+          {({ isActive }) => (
+            <>
+              Match Center
+              {isActive && (
+                <span
+                  className="
+                  absolute
+                  left-0
+                  -bottom-1
+
+                  w-full
+                  h-[2px]
+
+                  rounded-full
+
+                  bg-cyan-400
+
+                  shadow-[0_0_12px_cyan]
+                "
+                />
+              )}
+            </>
+          )}
         </NavLink>
 
         <NavLink to="/world-cup" className={linkStyles}>
-          World Cup 2026
+          {({ isActive }) => (
+            <>
+              WC26
+              {isActive && (
+                <span
+                  className="
+                  absolute
+                  left-0
+                  -bottom-1
+
+                  w-full
+                  h-[2px]
+
+                  rounded-full
+
+                  bg-cyan-400
+
+                  shadow-[0_0_12px_cyan]
+                "
+                />
+              )}
+            </>
+          )}
         </NavLink>
 
         <NavLink to="/teams" className={linkStyles}>
-          Teams
+          {({ isActive }) => (
+            <>
+              Teams
+              {isActive && (
+                <span
+                  className="
+                  absolute
+                  left-0
+                  -bottom-1
+
+                  w-full
+                  h-[2px]
+
+                  rounded-full
+
+                  bg-cyan-400
+
+                  shadow-[0_0_12px_cyan]
+                "
+                />
+              )}
+            </>
+          )}
         </NavLink>
 
         <NavLink to="/favorites" className={linkStyles}>
-          Favorites
+          {({ isActive }) => (
+            <>
+              Favorites
+              {isActive && (
+                <span
+                  className="
+                  absolute
+                  left-0
+                  -bottom-1
+
+                  w-full
+                  h-[2px]
+
+                  rounded-full
+
+                  bg-cyan-400
+
+                  shadow-[0_0_12px_cyan]
+                "
+                />
+              )}
+            </>
+          )}
         </NavLink>
       </div>
     </nav>
