@@ -9,6 +9,8 @@ import WorldCup from "./pages/WorldCup";
 import Teams from "./pages/Teams";
 import Favorites from "./pages/Favorites";
 
+
+
 function App() {
   return (
     <BrowserRouter>
