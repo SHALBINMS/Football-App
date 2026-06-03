@@ -8,53 +8,31 @@ import MatchCenter from "./pages/MatchCenter";
 import WorldCup from "./pages/WorldCup";
 import Teams from "./pages/Teams";
 import Favorites from "./pages/Favorites";
+import TeamDetails from "./pages/TeamDetails";
 
 
 
 function App() {
   return (
     <BrowserRouter>
-
       <div className="min-h-screen bg-blue-950">
-
         <Navbar />
 
         <Routes>
+          <Route path="/" element={<Home />} />
 
-          <Route
-            path="/"
-            element={<Home />}
-          />
+          <Route path="/players" element={<Players />} />
 
-          <Route
-            path="/players"
-            element={<Players />}
-          />
+          <Route path="/match-center" element={<MatchCenter />} />
 
-          <Route
-            path="/match-center"
-            element={<MatchCenter />}
-          />
+          <Route path="/world-cup" element={<WorldCup />} />
 
-          <Route
-            path="/world-cup"
-            element={<WorldCup />}
-          />
+          <Route path="/teams" element={<Teams />} />
+          <Route path="/teams/:id" element={<TeamDetails />} />
 
-          <Route
-            path="/teams"
-            element={<Teams />}
-          />
-
-          <Route
-            path="/favorites"
-            element={<Favorites />}
-          />
-
+          <Route path="/favorites" element={<Favorites />} />
         </Routes>
-
       </div>
-
     </BrowserRouter>
   );
 }
