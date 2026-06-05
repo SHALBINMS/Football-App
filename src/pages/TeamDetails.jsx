@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import teams from "../data/teams";
 import players from "../data/players";
 import PlayerCard from "../components/PlayerCard";
+import StatCard from "../components/StatCard";
 
 function TeamDetails() {
   const { id } = useParams();
@@ -140,6 +141,25 @@ function TeamDetails() {
           {teamPlayers.map((player) => (
             <PlayerCard key={player.id} player={player} />
           ))}
+        </div>
+      </div>
+      {/* STATS SECTION */}
+      <div className="mt-20">
+        <div
+          className="
+    grid
+    grid-cols-1
+    md:grid-cols-2
+    gap-6
+  "
+        >
+          <StatCard value={team.stats.wins} label="Wins" />
+
+          <StatCard value={team.stats.goals} label="Goals" />
+
+          <StatCard value={team.stats.cleanSheets} label="Clean Sheets" />
+
+          <StatCard value={team.stats.possession} label="Possession" />
         </div>
       </div>
     </div>

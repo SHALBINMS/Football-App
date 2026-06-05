@@ -10,6 +10,13 @@ const teams = [
 
     banner:
       "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1600&auto=format&fit=crop",
+
+    stats: {
+      wins: 18,
+      goals: 42,
+      cleanSheets: 10,
+      possession: "64%",
+    },
   },
 
   {
@@ -23,6 +30,13 @@ const teams = [
 
     banner:
       "https://images.unsplash.com/photo-1547347298-4074fc3086f0?q=80&w=1600&auto=format&fit=crop",
+
+    stats: {
+      wins: 18,
+      goals: 42,
+      cleanSheets: 10,
+      possession: "64%",
+    },
   },
 ];
 
