@@ -1,7 +1,40 @@
 import matches from "../data/matches";
 import MatchCard from "../components/MatchCard";
 
+import { useState , useEffect } from "react";
+
 function MatchCenter() {
+
+  const [liveMatches,setLiveMatches] = useState(matches);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLiveMatches((prevMatches) => {
+        return prevMatches.map((match) => {
+          if (match.status === "LIVE") {
+            const newMinute = match.minute + 1;
+          if (newMinute >= 90){
+            return{
+              ...match,
+              minute:90,
+              status: "FT"
+            };
+
+          }
+
+          return {
+            ...match,
+            minute: newMinute,
+          };
+          }
+
+          return match;
+        });
+      });
+    },3000);
+
+    return () => clearInterval(interval);
+  },[]);
   return (
     <div className="px-6 py-10">
       <h1
@@ -23,7 +56,7 @@ function MatchCenter() {
           gap-6
         "
       >
-        {matches.map((match) => (
+        {liveMatches.map((match) => (
           <MatchCard key={match.id} match={match} />
         ))}
       </div>

@@ -9,6 +9,7 @@ import WorldCup from "./pages/WorldCup";
 import Teams from "./pages/Teams";
 import Favorites from "./pages/Favorites";
 import TeamDetails from "./pages/TeamDetails";
+import MatchDetails from "./pages/MatchDetails";
 
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/players" element={<Players />} />
 
           <Route path="/match-center" element={<MatchCenter />} />
+          <Route path="/matches/:id" element={<MatchDetails />} />
 
           <Route path="/world-cup" element={<WorldCup />} />
 
