@@ -11,9 +11,38 @@ import Favorites from "./pages/Favorites";
 import TeamDetails from "./pages/TeamDetails";
 import MatchDetails from "./pages/MatchDetails";
 
-
+import { useState , useEffect } from "react";
+import matches from "./data/matches";
 
 function App() {
+  const [liveMatches, setLiveMatches] = useState(matches);
+   useEffect(() => {
+      const interval = setInterval(() => {
+        setLiveMatches((prevMatches) => {
+          return prevMatches.map((match) => {
+            if (match.status === "LIVE") {
+              const newMinute = match.minute + 1;
+              if (newMinute >= 90) {
+                return {
+                  ...match,
+                  minute: 90,
+                  status: "FT",
+                };
+              }
+  
+              return {
+                ...match,
+                minute: newMinute,
+              };
+            }
+  
+            return match;
+          });
+        });
+      }, 3000);
+  
+      return () => clearInterval(interval);
+    }, []);
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-blue-950">
@@ -24,8 +53,17 @@ function App() {
 
           <Route path="/players" element={<Players />} />
 
-          <Route path="/match-center" element={<MatchCenter />} />
-          <Route path="/matches/:id" element={<MatchDetails />} />
+          <Route
+            path="/match-center"
+            element={
+              <MatchCenter
+                liveMatches={liveMatches}
+                setLiveMatches={setLiveMatches}
+              />
+            }
+          />
+          <Route path="/matches/:id" element={<MatchDetails 
+          liveMatches={liveMatches} />} />
 
           <Route path="/world-cup" element={<WorldCup />} />
 
