@@ -5,45 +5,33 @@ import { useState } from "react";
 function Teams() {
   const [searchTerm, setSearchTerm] = useState("");
   const filteredTeams = team.filter((team) =>
-  team.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+    team.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
   return (
-    <div className="px-6 py-10">
-      <h1
-        className="
-          text-4xl
-          font-bold
-          text-white
-          mb-10
-        "
-      >
-        World Cup Teams
-      </h1>
+    <div className="page-shell">
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">National teams</p>
+          <h1 className="page-title">World Cup Teams</h1>
+          <p className="page-subtitle">
+            Browse qualified nations, coaches, groups, and rankings.
+          </p>
+        </div>
+        <p className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
+          {filteredTeams.length} teams
+        </p>
+      </div>
+
       <input
         type="text"
         placeholder="Search teams..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="
-        w-full
-        rounded-lg
-        bg-zinc-800
-        text-white
-        border
-        border-zinc-700
-        p-3
-        mb-8
-        "
-        />
-      <div
-        className="
-          grid
-          gap-6
-          grid-cols-1
-          md:grid-cols-2
-          lg:grid-cols-3
-        "
-      >
+        className="form-control mb-8 max-w-xl"
+      />
+
+      <div className="content-grid">
         {filteredTeams.map((team) => (
           <TeamCard key={team.id} team={team} />
         ))}

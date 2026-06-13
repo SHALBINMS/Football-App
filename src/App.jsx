@@ -46,7 +46,7 @@ function App() {
     }, []);
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-blue-950">
+      <div className="app-shell">
         <Navbar />
 
         <Routes>

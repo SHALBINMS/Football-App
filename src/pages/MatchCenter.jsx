@@ -1,31 +1,25 @@
 
 import MatchCard from "../components/MatchCard";
 
-import { useState , useEffect } from "react";
+function MatchCenter({ liveMatches }) {
+  const liveCount = liveMatches.filter((match) => match.status === "LIVE").length;
 
-function MatchCenter({ liveMatches, setLiveMatches }) {
-  
   return (
-    <div className="px-6 py-10">
-      <h1
-        className="
-          text-4xl
-          font-bold
-          text-white
-          mb-10
-        "
-      >
-        Match Center
-      </h1>
+    <div className="page-shell">
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">Live desk</p>
+          <h1 className="page-title">Match Center</h1>
+          <p className="page-subtitle">
+            Track scores, status, and match momentum as the clock advances.
+          </p>
+        </div>
+        <p className="rounded-full bg-red-500/15 px-4 py-2 text-sm font-black text-red-300">
+          {liveCount} live
+        </p>
+      </div>
 
-      <div
-        className="
-          grid
-          grid-cols-1
-          md:grid-cols-2
-          gap-6
-        "
-      >
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {liveMatches.map((match) => (
           <MatchCard key={match.id} match={match} />
         ))}

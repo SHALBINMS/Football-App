@@ -1,78 +1,21 @@
-import { useEffect, useState } from "react";
-import "../styles/App.css";
+import { useState } from "react";
 import PlayerList from "../components/PlayerList";
 import shuffledPlayers from "../data/players";
 
 function Players() {
-  const [players, setPlayers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [players] = useState(shuffledPlayers);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOption, setSortOption] = useState("");
   const [eliteOnly, setEliteOnly] = useState(false);
-
-  /*useEffect(() => {
-    const fetchPlayers = async () => {
-      try {
-        console.log("Fetching data...");
-
-        const response = await fetch(
-          "https://free-api-live-football-data.p.rapidapi.com/football-players-search?search=m",
-          {
-            method: "GET",
-            headers: {
-              "X-RapidAPI-Key": "ac670c0601msh6a7fcfb0d2cd518p1ae736jsnde1c84388255", 
-              "X-RapidAPI-Host": "free-api-live-football-data.p.rapidapi.com"
-            }
-          }
-        );
-
-        console.log("2️⃣ Response received:", response);
-
-        const data = await response.json();
-
-        console.log("3️⃣ Data parsed successfully:", data);
-
-        console.log("4️⃣ Players array:", data.response.suggestions);
-
-        setPlayers(data.response.suggestions);
-        setLoading(false);
-
-      }
-  
-     
-        catch (error) {
-        console.log("Error:", error);
-        setError("Failed to fetch data");
-        setLoading(false);
-      }
-    };
-
-   // fetchPlayers();
-  }, []);*/
-
-  useEffect(() => {
-    setPlayers(shuffledPlayers);
-    setLoading(false);
-  }, []);
-
-  useEffect(() => {
-    console.log("Updated players:", players);
-  }, [players]);
 
   const filteredPlayers = players.filter((player) => {
     const matchesSearch = player.name
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
-
     const matchesElite = eliteOnly ? player.rating > 90 : true;
 
     return matchesSearch && matchesElite;
   });
-
-  const handleEliteToggle = () => {
-    setEliteOnly(!eliteOnly);
-  };
 
   const sortedPlayers = [...filteredPlayers];
 
@@ -88,50 +31,56 @@ function Players() {
     sortedPlayers.sort((a, b) => a.name.localeCompare(b.name));
   }
 
-  if (loading) {
-    return <h2>Loading players...</h2>;
-  }
-
-  if (error) {
-    return <h2>{error}</h2>;
-  }
   return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>⚽ Football Players Dashboard</h1>
-
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Search football players..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
-        />
+    <div className="page-shell">
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">Player database</p>
+          <h1 className="page-title">Players Dashboard</h1>
+          <p className="page-subtitle">
+            Search the squad pool, sort by performance score, and surface elite
+            talent quickly.
+          </p>
+        </div>
+        <p className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-bold text-slate-300">
+          {sortedPlayers.length} shown
+        </p>
       </div>
 
-      <div className="filter-container">
-        <button className="elite-btn" onClick={handleEliteToggle}>
-          {eliteOnly ? "Show All Players" : "Show Elite Players"}
-        </button>
-      </div>
+      <div className="glass-panel rounded-3xl p-5">
+        <div className="grid gap-4 md:grid-cols-[1fr_auto_auto]">
+          <input
+            type="text"
+            placeholder="Search football players..."
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            className="form-control"
+          />
 
-      <div className="sort-container">
-        <select
-          value={sortOption}
-          onChange={(e) => setSortOption(e.target.value)}
-          className="sort-select"
-        >
-          <option value="">Sort Players</option>
-          <option value="high-score">Highest Score</option>
-          <option value="low-score">Lowest Score</option>
-          <option value="a-z">A-Z</option>
-        </select>
+          <button
+            className="secondary-btn"
+            onClick={() => setEliteOnly((value) => !value)}
+          >
+            {eliteOnly ? "Show All Players" : "Show Elite Players"}
+          </button>
+
+          <select
+            value={sortOption}
+            onChange={(event) => setSortOption(event.target.value)}
+            className="form-control md:w-48"
+          >
+            <option value="">Sort Players</option>
+            <option value="high-score">Highest Score</option>
+            <option value="low-score">Lowest Score</option>
+            <option value="a-z">A-Z</option>
+          </select>
+        </div>
       </div>
 
       {sortedPlayers.length > 0 ? (
         <PlayerList players={sortedPlayers} />
       ) : (
-        <h2 className="not-found">⚽ No players found</h2>
+        <h2 className="empty-state mt-8">No players found</h2>
       )}
     </div>
   );

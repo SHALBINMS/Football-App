@@ -2,63 +2,46 @@ import { Link } from "react-router-dom";
 
 function TeamCard({ team }) {
   return (
-    <Link to={`/teams/${team.id}`}>
-      <div
-        className="
-          bg-zinc-900
-          p-6
-          rounded-2xl
-          border border-zinc-800
-
-          hover:scale-105
-          hover:border-cyan-500/50
-
-          transition-all
-          duration-300
-
-          h-full
-        "
-      >
+    <Link to={`/teams/${team.id}`} className="block h-full">
+      <div className="team-card group relative flex h-full flex-col overflow-hidden p-6">
         <img
           src={team.logo}
-          alt={team.name}
-          className="
-            w-20
-            h-20
-            object-contain
-            mb-5
-          "
+          alt=""
+          aria-hidden="true"
+          className="team-card-watermark"
         />
 
-        <h2
-          className="
-            text-2xl
-            font-bold
-            text-white
-            mb-4
-          "
-        >
+        <div className="mb-7 flex items-start justify-between gap-4">
+          <div className="team-logo-frame">
+            <div className="team-logo-inner">
+              <div className="team-logo-shine" />
+              <span className="team-logo-initial">{team.name.charAt(0)}</span>
+            <img
+              src={team.logo}
+              alt={team.name}
+                className="team-logo-img"
+            />
+            </div>
+          </div>
+          <span className="rounded-full bg-yellow-400/15 px-3 py-1 text-sm font-black text-yellow-200">
+            #{team.fifaRank}
+          </span>
+        </div>
+
+        <h2 className="text-2xl font-black tracking-tight text-white">
           {team.name}
         </h2>
 
-        <div className="space-y-3 text-zinc-400">
-          <p>
-            Coach:
-            <span className="text-white ml-2">{team.coach}</span>
-          </p>
-
-          <p>
-            Group:
-            <span className="text-cyan-400 ml-2 font-semibold">
-              {team.group}
+        <div className="mt-6 space-y-3 text-sm text-slate-400">
+          <p className="flex items-center justify-between gap-4">
+            <span>Coach</span>
+            <span className="text-right font-semibold text-white">
+              {team.coach}
             </span>
           </p>
-
-          <p>
-            FIFA Rank:
-            <span className="text-yellow-400 ml-2 font-semibold">
-              #{team.fifaRank}
-            </span>
+          <p className="flex items-center justify-between gap-4">
+            <span>Group</span>
+            <span className="font-black text-teal-300">{team.group}</span>
           </p>
         </div>
       </div>

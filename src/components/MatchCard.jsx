@@ -1,84 +1,36 @@
 import { Link } from "react-router-dom";
 
 function MatchCard({ match }) {
+  const isLive = match.status === "LIVE";
+
   return (
-    <Link to={`/matches/${match.id}`}>
-      <div
-        className="
-          bg-zinc-900
-          border border-zinc-800
-          rounded-2xl
-          p-6
-
-          hover:border-cyan-500/40
-          hover:scale-105
-
-          transition-all
-          duration-300
-
-          cursor-pointer
-        "
-      >
-        {/* MATCH STATUS */}
+    <Link to={`/matches/${match.id}`} className="block h-full">
+      <div className="match-card h-full p-6">
         <div className="flex justify-between items-center mb-6">
-          <p
-            className="
-              text-red-400
-              font-semibold
-              tracking-wide
-            "
-          >
+          <p className={`rounded-full px-3 py-1 text-xs font-black tracking-wide ${isLive ? "bg-red-500/15 text-red-300" : "bg-white/10 text-slate-300"}`}>
             {match.status}
           </p>
 
-          <p className="text-zinc-400">{match.minute}'</p>
+          <p className="text-sm font-semibold text-slate-400">{match.minute}'</p>
         </div>
 
-        {/* TEAMS */}
         <div className="space-y-4">
           <div className="flex justify-between items-center">
-            <h2
-              className="
-                text-white
-                text-xl
-                font-semibold
-              "
-            >
-              {match.homeTeam}
-            </h2>
-
-            <p
-              className="
-                text-3xl
-                font-bold
-                text-white
-              "
-            >
-              {match.homeScore}
-            </p>
+            <h2 className="text-xl font-bold text-white">{match.homeTeam}</h2>
+            <p className="text-4xl font-black text-white">{match.homeScore}</p>
           </div>
 
           <div className="flex justify-between items-center">
-            <h2
-              className="
-                text-white
-                text-xl
-                font-semibold
-              "
-            >
-              {match.awayTeam}
-            </h2>
-
-            <p
-              className="
-                text-3xl
-                font-bold
-                text-white
-              "
-            >
-              {match.awayScore}
-            </p>
+            <h2 className="text-xl font-bold text-white">{match.awayTeam}</h2>
+            <p className="text-4xl font-black text-white">{match.awayScore}</p>
           </div>
+        </div>
+
+        <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-white/10">
+          <div
+            className="h-full rounded-full bg-teal-300"
+            style={{ width: `${Math.min(match.minute, 90) / 0.9}%` }}
+          />
         </div>
       </div>
     </Link>

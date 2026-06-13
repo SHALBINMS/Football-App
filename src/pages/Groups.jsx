@@ -1,33 +1,48 @@
-import React from "react";
 import { groups } from "../data/groups";
 import { Link } from "react-router-dom";
 
 const Groups = () => {
   return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold mb-8">World Cup Groups</h1>
+    <div className="page-shell">
+      <div className="page-header">
+        <div>
+          <p className="eyebrow">Standings</p>
+          <h1 className="page-title">World Cup Groups</h1>
+          <p className="page-subtitle">
+            Top two teams in each group qualify for the knockout stage.
+          </p>
+        </div>
+      </div>
 
-      <div className="grid gap-6">
+      <div className="mb-6 rounded-3xl border border-teal-300/20 bg-teal-300/10 p-5 text-sm font-semibold leading-7 text-slate-300">
+        <span className="font-black text-teal-200">Qualification note:</span>{" "}
+        the top two teams in every group are highlighted and move into the
+        knockout stage.
+      </div>
+
+      <div className="groups-layout">
         {groups.map((group) => (
-          <div
-            key={group.id}
-            className="
-    bg-slate-800
-    rounded-xl
-    p-4
-    transition-all
-    duration-300
-    hover:scale-[1.02]
-    hover:shadow-2xl
-    hover:shadow-green-500/10
-  "
-          >
-            <h2 className="text-2xl font-bold mb-4">Group {group.id}</h2>
+          <div key={group.id} className="group-card">
+            <div className="group-card-header">
+              <div className="flex items-center gap-4">
+                <div className="group-badge">{group.id}</div>
+                <div>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">
+                    Group
+                  </p>
+                  <h2 className="text-2xl font-black text-white">
+                    Group {group.id}
+                  </h2>
+                </div>
+              </div>
+              <span className="qualification-pill">Top 2 qualify</span>
+            </div>
+
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
+              <table className="group-table">
                 <thead>
-                  <tr className="border-b border-slate-600">
-                    <th className="py-2">Team</th>
+                  <tr>
+                    <th>Team</th>
                     <th>P</th>
                     <th>W</th>
                     <th>D</th>
@@ -38,14 +53,12 @@ const Groups = () => {
 
                 <tbody>
                   {group.teams.map((team, index) => (
-                    <tr
-                      key={team.id}
-                      className={index < 2 ? "bg-green-900/30" : ""}
-                    >
-                      <td className="py-2">
+                    <tr key={team.id}>
+                      <td className="team-cell">
+                        <span className="team-seed">{index + 1}</span>
                         <Link
                           to={`/teams/${team.id}`}
-                          className="hover:text-blue-400 transition"
+                          className="font-semibold text-white transition hover:text-teal-300"
                         >
                           {team.name}
                         </Link>
@@ -54,7 +67,7 @@ const Groups = () => {
                       <td>{team.won}</td>
                       <td>{team.draw}</td>
                       <td>{team.lost}</td>
-                      <td>{team.points}</td>
+                      <td className="points-cell">{team.points}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -63,9 +76,6 @@ const Groups = () => {
           </div>
         ))}
       </div>
-      <p className="text-sm text-green-400 mt-3">
-        Top 2 teams qualify for knockout stage
-      </p>
     </div>
   );
 };
