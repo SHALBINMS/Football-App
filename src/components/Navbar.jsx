@@ -182,10 +182,10 @@ function NavBar() {
           )}
         </NavLink>
 
-        <NavLink to="/world-cup" className={linkStyles}>
+        <NavLink to="/groups" className={linkStyles}>
           {({ isActive }) => (
             <>
-              WC26
+              Groups/Standings
               {isActive && (
                 <span
                   className="

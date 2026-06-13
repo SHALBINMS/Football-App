@@ -1,7 +1,12 @@
 import TeamCard from "../components/TeamCard";
 import team from "../data/teams";
+import { useState } from "react";
 
 function Teams() {
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredTeams = team.filter((team) =>
+  team.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   return (
     <div className="px-6 py-10">
       <h1
@@ -14,7 +19,22 @@ function Teams() {
       >
         World Cup Teams
       </h1>
-
+      <input
+        type="text"
+        placeholder="Search teams..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="
+        w-full
+        rounded-lg
+        bg-zinc-800
+        text-white
+        border
+        border-zinc-700
+        p-3
+        mb-8
+        "
+        />
       <div
         className="
           grid
@@ -24,7 +44,7 @@ function Teams() {
           lg:grid-cols-3
         "
       >
-        {team.map((team) => (
+        {filteredTeams.map((team) => (
           <TeamCard key={team.id} team={team} />
         ))}
       </div>

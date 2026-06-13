@@ -1,18 +1,53 @@
 import { useParams } from "react-router-dom";
+import { useState,useEffect } from "react";
 import teams from "../data/teams";
 import players from "../data/players";
 import PlayerCard from "../components/PlayerCard";
 import StatCard from "../components/StatCard";
 
+
 function TeamDetails() {
+ const [isFavorite, setIsFavorite] = useState(false);
+
   const { id } = useParams();
 
   const team = teams.find((team) => team.id === id);
+
+  if (!team) {
+    return <div className="text-center text-2xl mt-10">Team not found</div>;
+  }
 
   const teamPlayers = players.filter(
     (player) => player.nationality === team.name,
   );
 
+ const toggleFavorite = () => {
+   const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+   if (favorites.includes(team.id)) {
+     const updatedFavorites = favorites.filter(
+       (favoriteId) => favoriteId !== team.id,
+     );
+
+     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+     setIsFavorite(false);
+   } else {
+     const updatedFavorites = [...favorites, team.id];
+
+     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+
+     setIsFavorite(true);
+   }
+ };
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    if (favorites.includes(team.id)) {
+      setIsFavorite(true);
+    }
+  }, [team.id]);
   return (
     <div className="px-6 py-10">
       {/* HERO SECTION */}
@@ -87,6 +122,26 @@ function TeamDetails() {
             >
               {team.name}
             </h1>
+            <button
+              onClick={toggleFavorite}
+              className="
+    mt-4
+    px-5
+    py-2
+    rounded-lg
+    border
+    border-white/30
+    bg-white/10
+    backdrop-blur-sm
+    text-white
+    font-medium
+    hover:bg-white/20
+    transition-all
+    duration-300
+  "
+            >
+              {isFavorite ? "⭐ Remove Favorite" : "⭐ Add Favorite"}
+            </button>
 
             <div className="space-y-4">
               <p className="text-zinc-300 text-lg">

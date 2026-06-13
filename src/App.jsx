@@ -10,6 +10,7 @@ import Teams from "./pages/Teams";
 import Favorites from "./pages/Favorites";
 import TeamDetails from "./pages/TeamDetails";
 import MatchDetails from "./pages/MatchDetails";
+import Groups from "./pages/Groups";
 
 import { useState , useEffect } from "react";
 import matches from "./data/matches";
@@ -62,10 +63,14 @@ function App() {
               />
             }
           />
-          <Route path="/matches/:id" element={<MatchDetails 
-          liveMatches={liveMatches} />} />
+          <Route
+            path="/matches/:id"
+            element={<MatchDetails liveMatches={liveMatches} />}
+          />
 
           <Route path="/world-cup" element={<WorldCup />} />
+
+          <Route path="/groups" element={<Groups />} />
 
           <Route path="/teams" element={<Teams />} />
           <Route path="/teams/:id" element={<TeamDetails />} />
