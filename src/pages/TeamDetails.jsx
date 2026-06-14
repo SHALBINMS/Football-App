@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import PlayerCard from "../components/PlayerCard";
 import StatCard from "../components/StatCard";
-import players from "../data/players";
+import players from "../data/Players";
 import teams from "../data/teams";
 
 function TeamDetails() {

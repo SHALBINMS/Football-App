@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PlayerList from "../components/PlayerList";
-import shuffledPlayers from "../data/players";
+import shuffledPlayers from "../data/Players";
 
 function Players() {
   const [players] = useState(shuffledPlayers);
